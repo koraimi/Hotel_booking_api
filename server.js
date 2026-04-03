@@ -67,9 +67,9 @@ hotelsRoute.setDb(db)
 app.use('/', usersRoute.router)
 app.use('/', adminsRoute.router)
 app.use('/', hotelsRoute.router)
-
-app.listen(process.env.PORT, () => {
-console.log(`Server is up on port ${process.env.PORT}`);
+const Port = process.env.PORT || 3000;
+app.listen(Port, () => {
+console.log(`Server is up on port ${Port}`  );
 });
 
 })();
