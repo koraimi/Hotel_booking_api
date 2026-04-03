@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Booking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Hotel Booking</h1>
+    <h1>index.html</h1>
+    <button class="pages" name="register"> user register</button>
+    <button class="pages" name='login'> user login</button>
+    <button class="pages" name='adminlogin'> admin login</button>
+<button class="pages" name='regdiv'> admin register</button>
+<button class="pages" name='Main'> user main</button>
+<button class="pages" name='admin_main'> admin main</button>
+
+
+<script>
+
+const buttons=document.getElementsByClassName('pages');
+
+for(let i=0;i<buttons.length;i++){
+buttons[i].addEventListener('click',()=>{
+  const name=buttons[i].getAttribute('name')
+  alert(name)
+  alert(name+".html")
+ window.location.href=name+'.html'
+})
+}
+       
+       
+    </script>
+</body>
+</html>

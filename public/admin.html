@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>add hotels</title>
+  <link rel="stylesheet" href="adstyle.css">
+</head>
+
+
+
+<body>
+   <h1>website name</h1>
+   <h3>username</h3>
+  <div id="header">
+    <button>profile</button>
+   <button>bookings</button>
+    <button>contact us</button>
+    <button>about</button>
+    
+  </div>
+  <div id="panel">
+    
+    
+    <div id="manage">
+    <button id="show">show bookings</button>
+    <button id="managebtn">manage</button>
+  
+  <div id="up">
+    <h1>add your hotels</h1>
+    
+
+  </div >
+  
+  
+  
+<div id="result">
+  <p>here</p>
+  </div>
+  <button id="addhotel">add hotel</button>
+  
+  <script>
+
+  
+  const addhotelbtn=document.getElementById("addhotel");
+addhotelbtn.addEventListener('click',async()=>{
+  
+  let token=localStorage.getItem("token")
+  console.log(token)
+let response=await fetch("http://127.0.0.1:3000/adminpanel",{
+  headers:{
+    Authorization:'Bearer '+token
+  }
+})
+let res=await response.text();
+  console.log(res)
+  window.location.href=res
+  alert("blah")
+})
+   
+  let managebtn=document.getElementById('managebtn');
+  let resultdiv=document.getElementById('result');
+  managebtn.addEventListener('click',async()=>{
+    let token=localStorage.getItem("token")
+    const response=await fetch('http://127.0.0.1:3000/manage',{
+      headers:{
+        Authorization:'Bearer '+token
+      }
+    })
+    const res= await response.text();
+    
+    alert(res)
+    resultdiv.innerHTML=res;
+  })
+
+/*
+
+
+*/
+  </script>
+</body>
+
+
+
+</html>

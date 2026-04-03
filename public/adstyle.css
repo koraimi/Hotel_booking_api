@@ -1,0 +1,13 @@
+h1{
+  background-color: darkorange;
+}
+img{
+  width: 200 px;
+  height: 100 px;
+  background-color: blue;
+}
+#images{
+  background-color: greenyellow;
+  width: 500 px;
+  height: 500 px;
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>main page</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <div id="navbar">
+      <h4 id="role">role</h4>
+      <h3 id="username">username</h3>
+      <h1>bookingchad.com</h1>
+      <button id='profilebtn'>profile</button>
+       <button id="bookings">bookings</button>
+        <button>about</button>
+         <button>contact us</button>
+         <button id="logout">logout</button>
+     
+    </div>
+    <input name="search" type='search' placeholder="search hotels">
+     <button id="searchbtn">search</button>
+      <button id='find'>find</button>
+      <div id="output">
+        
+        
+      </div>
+     <div>
+      
+       <h1>the best booking service in chad</h1>
+       <p>enjoy your travel in chad and dont wory about your place you can book your hotel with few clilcks even before you can come to the country
+       you can browse all the hotels availeble and choose what fits you</p>
+     </div>
+     
+     
+     <script>
+       
+       function render(data){
+         
+         const output=document.getElementById('output');
+         output.textContent=''
+         const out=document.createElement('h1');
+         out.innerHTML=data;
+         output.appendChild(out)
+        
+       }
+       
+       const profilebtn=document.getElementById('profilebtn');
+       
+       profilebtn.addEventListener('click',async()=>{
+        
+        const res=await fetch('http://127.0.0.1:3000/user_profile',{
+          method:'GET',
+          headers:{
+              'Authorization':'Bearer '+token}
+        }) 
+        
+        const data=await res.json();
+        render(JSON.stringify(data))
+       })
+       const bookings=document.getElementById('bookings');
+      
+      bookings.addEventListener('click',async()=>{
+        alert('here')
+        const res=await fetch('http://127.0.0.1:3000/mybookings',{
+          method:'GET',
+          headers:{
+              'Authorization':'Bearer '+token}
+        })
+        
+        const result=await res.json();
+        
+        alert(JSON.stringify(result));
+      
+        
+      })
+      
+       const username=localStorage.getItem("username")
+       const role=localStorage.getItem("role");
+       const account=document.getElementById("role");
+       const name=document.getElementById('username')
+       name.innerHTML=username
+      // account.innerHTML=role;
+       alert(username)
+       const output=document.getElementById('output');
+       
+       const token=localStorage.getItem("token");
+       const logoutbtn=document.getElementById('logout');
+       logoutbtn.addEventListener('click',async()=>{
+         
+         const res=await fetch('http://127.0.0.1:3000/logout',{
+           method:'GET',
+           headers:{
+              'Authorization':'Bearer '+token
+           }
+         })
+         const response=await res.json();
+         if(res.ok){
+         
+         
+         
+         localStorage.removeItem('token')
+         localStorage.removeItem('username');
+         
+        
+         window.location.href=response.url
+         }else{
+           alert('you are not logged in')
+         }
+       })
+       const findbtn=document.getElementById('find');
+       findbtn.addEventListener('click',async ()=>{
+         output.textContent=""
+         const res= await fetch('http://127.0.0.1:3000/findHotels',{
+           method:'GET',
+           headers:{
+              'Authorization':'Bearer '+token
+           }
+         })
+         
+         const resp=await res.text()
+         
+         alert(resp)
+         
+        console.log('top')
+        console.log(resp)
+        alert(resp)
+        const loop=JSON.parse(resp);
+        console.log(loop.length)
+    for(let i=0;i<loop.length;i++){
+        console.log('bottom')
+        
+       if(loop[i]!==null){
+          const img=document.createElement('img')
+          const h1=document.createElement('h1');
+          const div=document.createElement('div')
+         h1.innerHTML=loop[i].hotelname;
+      img.setAttribute('src',loop[i].img)
+      alert(loop[i].img)
+      console.log(loop[i].img)
+      img.setAttribute("id","item"+i);
+      h1.setAttribute('id',"item"+i);
+      div.setAttribute('class',"dataelements");
+      div.setAttribute('id','div'+1)
+          
+          div.appendChild(h1);
+         div.appendChild(img);
+         output.appendChild(div)
+       //  output.innerHTML="hssjsjsjdjdkdodkdkdk"
+          
+        }
+    }
+    makeCliackable()
+       })
+       
+       function makeCliackable(){
+         
+         const items=document.getElementsByClassName('dataelements')
+         
+         const itemslength=items.length
+         
+         for(let i=0;i<itemslength;i++){
+        
+          
+           
+           items[i].addEventListener('click',async()=>{
+             const h=document.getElementById("item"+i).textContent;
+          const res=await fetch(`http://127.0.0.1:3000/hotel/${h}`,{
+            method:'GET',
+            headers:{
+              'Authorization':'Bearer '+token
+             }
+          })
+        const response=await res.json()
+       // alert(response)
+       alert(response)
+        bookpage(response)
+           })
+         }
+         
+         
+       }
+      
+      function bookpage(data){
+        
+      
+        const name=data[1];
+        
+        const rooms=data[2]
+        const price=data[3];
+        const city=data[4];
+        const number=data[5]
+        const email=data[6]
+        
+        const images =JSON.parse(data[7]);
+      
+        
+        
+        const div=document.createElement('div');
+        const hotelname=document.createElement('h1')
+        const pricefield=document.createElement('h1');
+        const phone=document.createElement('h2')
+        const imgssize=images.length;
+        const emailField=document.createElement('h4');
+        const cityname=document.createElement('h2');
+        hotelname.innerHTML=name;
+        pricefield.innerHTML="price is $"+price;
+        phone.innerHTML=number;
+        cityname.innerHTML=city;
+        emailField.innerHTML=email;
+        div.appendChild(hotelname);
+        alert(images.length)
+        for(let i=0;i<images.length;i++){
+          let img=document.createElement('img')
+          img.setAttribute('src',images[i])
+          div.appendChild(img);
+        }
+        div.appendChild(phone)
+        div.appendChild(cityname)
+       div.appendChild(pricefield)
+       div.appendChild(emailField)
+       const bookbtn=document.createElement('button');
+        bookbtn.setAttribute('id','book');
+        bookbtn.textContent="book a room now"
+        
+        output.textContent="";
+        output.appendChild(div);
+        output.appendChild(bookbtn)
+      
+        bookbtn.addEventListener('click',async()=>{
+        
+        
+        
+        const info={
+          hotelname:hotelname.textContent,
+          city:cityname.textContent}
+          
+          
+        const res=await fetch(`http://127.0.0.1:3000/book/${JSON.stringify(info)}`,{
+          method:'GET',
+          headers:{
+              'Authorization':'Bearer '+token}
+        })
+        
+        const message=await res.json();
+        
+        alert(message);
+        
+        
+        
+      })
+      
+      }
+      
+     </script>
+  </body>
+  
+</html>

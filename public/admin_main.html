@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>main page</title>
+    <link rel="stylesheet" href="ad_main.css">
+  </head>
+  <body>
+    <div id="navbar">
+      <h4 id="role">role</h4>
+      <h3 id="username">username</h3>
+      <h1>bookingchad.com</h1>
+      <button id="admin_profile">profile</button>
+       <button id="bookings">bookings</button>
+       <button id="manage">manage</button>
+        <button>about</button>
+         <button>contact us</button>
+         <button id="logout">logout</button>
+     <div id="output">
+       
+     </div>
+       <h1>the best booking service in chad</h1>
+       <p>enjoy your travel in chad and dont wory about your place you can book your hotel with few clilcks even before you can come to the country
+       you can browse all the hotels availeble and choose what fits you</p>
+     </div>
+     
+     
+     <script>
+       const username=localStorage.getItem("username")
+       const role=localStorage.getItem("role");
+       const account=document.getElementById("role");
+       const name=document.getElementById('username')
+       const bookings=document.getElementById("bookings");
+       name.innerHTML=username
+       const output= document.getElementById("output");
+       const logout=document.getElementById('logout')
+       logout.addEventListener('click',async()=>{
+         
+         const res=await fetch('http://127.0.0.1:3000/logoutAdmin',{
+           method:'GET',
+           headers:{
+              'Authorization':'Bearer '+token
+           }
+         })
+         const response=await res.json();
+         if(res.ok){
+         
+         
+         
+         localStorage.removeItem('token')
+         localStorage.removeItem('username');
+         localStorage.removeItem('role')
+         
+        
+         window.location.href=response.url
+         }else{
+           alert('you are not logged in')
+         }
+         
+         
+       })
+      // account.innerHTML=role;
+      const profile=document.getElementById('admin_profile');
+      const manage=document.getElementById("manage");
+      const token=localStorage.getItem('token');
+      
+      profile.addEventListener("click",async()=>{
+        
+        const res=await fetch('http://127.0.0.1:3000/admin_profile',{
+          method:'GET',
+          headers:{
+                  'Authorization':'Bearer '+token
+          }
+          
+        });
+        
+        const result=await res.text();
+        output.innerHTML=result;
+        alert(result)
+        if(result.find('error')){
+          alert("hi")
+        }
+        
+        
+        
+      })
+      
+      manage.addEventListener('click',async()=>{
+        
+        const res=await fetch('http://127.0.0.1:3000/adminpanel',{
+          method:'GET',
+          headers:{
+                  'Authorization':'Bearer '+token
+          }
+        })
+        
+        const resp=await res.text();
+        window.location.href=resp;
+      })
+      
+      bookings.addEventListener("click",async()=>{
+        alert('bookings')
+        const res= await fetch("http://127.0.0.1:3000/bookings",{
+          method:'GET',
+          headers:{
+                  'Authorization':'Bearer '+token
+          }
+        })
+        const resp=await res.json();
+        
+        alert(resp);
+        
+      })
+      
+      
+     </script>
+  </body>
+  
+</html>

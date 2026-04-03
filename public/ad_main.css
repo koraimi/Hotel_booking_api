@@ -1,0 +1,20 @@
+body{
+  background-color: #e7e8a6;
+  font-family: Times New Roman;
+  text-align: center;
+}
+#navbar{
+  background-color: #345a5e8d;
+  padding: 10px;
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-block: 10px;
+}
+h1 {
+  background-color: #dfe7ea;
+  border-radius :30px;
+}
+button {
+  background-color: #ee7fc6;
+  border-radius: 5px;
+}

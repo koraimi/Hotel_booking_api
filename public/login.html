@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="loginForm">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            alert("1")
+            const data = Object.fromEntries(new FormData(form).entries());
+            const res = await fetch('http://127.0.0.1:3000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await res.text();
+            alert("before")
+            
+            
+            if(res.ok){
+              alert(result)
+              const js=JSON.parse(result)
+              alert(js)
+                localStorage.setItem('token', js.token);
+               localStorage.setItem('username',js.username)
+            alert(js.url)
+            alert('break')
+                window.location.href=js.url;
+                console.log(js)
+               alert(js.url)
+                
+               console.log(token)
+            }
+            else{
+              alert(result)
+            }
+            
+        });
+    </script>
+</body>
+</html>
+

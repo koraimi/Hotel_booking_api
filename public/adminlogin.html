@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="body">
+    <h1> addmin Login</h1>
+    <form id="loginForm">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+    
+    <button id ="reg">register</button>
+    
+    <script>
+      let body =document.getElementById('body');
+      const regbtn=document.getElementById("reg")
+      regbtn.addEventListener("click",async()=>{
+        alert("****")
+        const res=await fetch('http://127.0.0.1:3000/admin-register',
+       {
+         method:"GET"
+       });
+        const response=await res.text();
+        console.log(response)
+       window.location.href=response;
+      })
+      const form=document.getElementById("loginForm");
+      
+      form.addEventListener("submit",async e=>{
+        e.preventDefault();
+        alert("done")
+       const data = Object.fromEntries(new FormData(form).entries());
+let obj={username:"hsjs",pass:"jdjddjdj"};
+const res = await fetch('http://127.0.0.1:3000/adminlog/', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json',
+},
+  body: JSON.stringify(data) // ✅ IMPORTANT
+});
+        
+        const result=await res.json();
+        
+        if(res.ok)
+        localStorage.removeItem('token')
+        localStorage.setItem("token",result.auth)
+        alert(JSON.stringify(result))
+        console.log(result)
+        if(result.url){
+       window.location.href=result.url
+        }
+      })
+      
+    
+      
+    </script>
+    </body>
+    </head>
