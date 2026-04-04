@@ -48,7 +48,7 @@
        
        profilebtn.addEventListener('click',async()=>{
         
-        const res=await fetch('http://127.0.0.1:3000/user_profile',{
+        const res=await fetch('https://hotel-booking-api-5.onrender.com/user_profile',{
           method:'GET',
           headers:{
               'Authorization':'Bearer '+token}
@@ -61,7 +61,7 @@
       
       bookings.addEventListener('click',async()=>{
         
-        const res=await fetch('http://127.0.0.1:3000/mybookings',{
+        const res=await fetch('https://hotel-booking-api-5.onrender.com/mybookings',{
           method:'GET',
           headers:{
               'Authorization':'Bearer '+token}
@@ -87,7 +87,7 @@
        const logoutbtn=document.getElementById('logout');
        logoutbtn.addEventListener('click',async()=>{
          
-         const res=await fetch('http://127.0.0.1:3000/logout',{
+         const res=await fetch('https://hotel-booking-api-5.onrender.com/logout',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -110,7 +110,7 @@
        const findbtn=document.getElementById('find');
        findbtn.addEventListener('click',async ()=>{
          output.textContent=""
-         const res= await fetch('http://127.0.0.1:3000/findHotels',{
+         const res= await fetch('https://hotel-booking-api-5.onrender.com/findHotels',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -123,7 +123,7 @@
          
         console.log('top')
         console.log(resp)
-        alert
+      
         const loop=JSON.parse(resp);
         console.log(loop.length)
     for(let i=0;i<loop.length;i++){
@@ -164,7 +164,7 @@
            
            items[i].addEventListener('click',async()=>{
              const h=document.getElementById("item"+i).textContent;
-          const res=await fetch(`http://127.0.0.1:3000/hotel/${h}`,{
+          const res=await fetch(`https://hotel-booking-api-5.onrender.com/hotel/${h}`,{
             method:'GET',
             headers:{
               'Authorization':'Bearer '+token
@@ -235,7 +235,7 @@
           city:cityname.textContent}
           
           
-        const res=await fetch(`http://127.0.0.1:3000/book/${JSON.stringify(info)}`,{
+        const res=await fetch(`/book/${JSON.stringify(info)}`,{
           method:'GET',
           headers:{
               'Authorization':'Bearer '+token}

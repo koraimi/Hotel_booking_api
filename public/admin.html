@@ -45,7 +45,7 @@ addhotelbtn.addEventListener('click',async()=>{
   
   let token=localStorage.getItem("token")
   console.log(token)
-let response=await fetch("http://127.0.0.1:3000/adminpanel",{
+let response=await fetch("https://hotel-booking-api-5.onrender.com/adminpanel",{
   headers:{
     Authorization:'Bearer '+token
   }
@@ -60,7 +60,7 @@ let res=await response.text();
   let resultdiv=document.getElementById('result');
   managebtn.addEventListener('click',async()=>{
     let token=localStorage.getItem("token")
-    const response=await fetch('http://127.0.0.1:3000/manage',{
+    const response=await fetch('/manage',{
       headers:{
         Authorization:'Bearer '+token
       }
