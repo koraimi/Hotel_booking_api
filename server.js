@@ -67,10 +67,13 @@ usersRoute.setDb(db)
 adminsRoute.setDb(db)
 hotelsRoute.setDb(db)
 
-app.get(' ', (req, res)=>{
+app.get('/', (req, res)=>{
 
 
-res.send('public/index.html')
+
+res.sendFile(path.join(__dirname, 'public', 'index.html'));
+
+
 
 });
 // Use routes
