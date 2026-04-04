@@ -33,6 +33,7 @@ return res.send("registered success")
 router.post('/login', async (req, res) => {
 const data = req.body
 const listofUsers = db.exec("SELECT * FROM users")[0];
+console.log('login hit')
 if (listofUsers) {
 const rows = listofUsers.values;
 let isuser = false;
