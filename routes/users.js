@@ -7,6 +7,8 @@ const { authenticateToken } = require('../middleware/auth')
 let db;
 function setDb(database) { db = database }
 
+const SECRET_KEY = process.env.SECRET_KEY;
+console.log(SECRET_KEY)
 router.post('/register', async (req, res) => {
 const user = req.body;
 const compare = db.exec('SELECT * FROM users')[0];

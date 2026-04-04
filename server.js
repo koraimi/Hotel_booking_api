@@ -76,6 +76,7 @@ app.use('/', hotelsRoute.router)
 const Port = process.env.PORT || 3000;
 app.listen(Port, () => {
 console.log('server started')
+console.log(process.env.SECRET_KEY)
 console.log(`Server is up on port ${Port}` );
 });
 
