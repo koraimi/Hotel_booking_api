@@ -235,7 +235,7 @@
           city:cityname.textContent}
           
           
-        const res=await fetch(`/book/${JSON.stringify(info)}`,{
+        const res=await fetch(`https://hotel-booking-api-5.onrender.com/book/${JSON.stringify(info)}`,{
           method:'GET',
           headers:{
               'Authorization':'Bearer '+token}

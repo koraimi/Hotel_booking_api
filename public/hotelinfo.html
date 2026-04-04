@@ -108,7 +108,7 @@ console.log("uploading....")
   // send everything at once
   let token=localStorage.getItem('token');
  // token=''
-  const res = await fetch("/upload", {
+  const res = await fetch("https://hotel-booking-api-5.onrender.com/upload", {
     method: "POST",
     headers:{
       'Authorization':'Bearer '+token

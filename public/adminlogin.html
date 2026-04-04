@@ -34,7 +34,7 @@
     
        const data = Object.fromEntries(new FormData(form).entries());
 let obj={username:"hsjs",pass:"jdjddjdj"};
-const res = await fetch('/adminlog/', {
+const res = await fetch('https://hotel-booking-api-5.onrender.com/adminlog', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json',
 },

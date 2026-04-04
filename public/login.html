@@ -18,7 +18,7 @@
             e.preventDefault();
             alert("1")
             const data = Object.fromEntries(new FormData(form).entries());
-            const res = await fetch('https://hotel-booking-api-5.onrender.com/login.html', {
+            const res = await fetch('https://hotel-booking-api-5.onrender.com/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
