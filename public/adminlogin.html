@@ -18,7 +18,7 @@
       let body =document.getElementById('body');
       const regbtn=document.getElementById("reg")
       regbtn.addEventListener("click",async()=>{
-        alert("****")
+        
         const res=await fetch('http://127.0.0.1:3000/admin-register',
        {
          method:"GET"
@@ -31,7 +31,7 @@
       
       form.addEventListener("submit",async e=>{
         e.preventDefault();
-        alert("done")
+    
        const data = Object.fromEntries(new FormData(form).entries());
 let obj={username:"hsjs",pass:"jdjddjdj"};
 const res = await fetch('http://127.0.0.1:3000/adminlog/', {
@@ -45,8 +45,8 @@ const res = await fetch('http://127.0.0.1:3000/adminlog/', {
         
         if(res.ok)
         localStorage.removeItem('token')
-        localStorage.setItem("token",result.auth)
-        alert(JSON.stringify(result))
+        localStorage.setItem("token",result.token)
+        alert(result)
         console.log(result)
         if(result.url){
        window.location.href=result.url

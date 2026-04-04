@@ -78,7 +78,7 @@
         output.innerHTML=result;
         alert(result)
         if(result.find('error')){
-          alert("hi")
+        
         }
         
         
@@ -106,7 +106,7 @@
                   'Authorization':'Bearer '+token
           }
         })
-        const resp=await res.json();
+        const resp=await res.text();
         
         alert(resp);
         

@@ -22,7 +22,7 @@ const buttons=document.getElementsByClassName('pages');
 for(let i=0;i<buttons.length;i++){
 buttons[i].addEventListener('click',()=>{
   const name=buttons[i].getAttribute('name')
-  alert(name)
+  
   alert(name+".html")
  window.location.href=name+'.html'
 })

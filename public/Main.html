@@ -60,7 +60,7 @@
        const bookings=document.getElementById('bookings');
       
       bookings.addEventListener('click',async()=>{
-        alert('here')
+        
         const res=await fetch('http://127.0.0.1:3000/mybookings',{
           method:'GET',
           headers:{
@@ -123,7 +123,7 @@
          
         console.log('top')
         console.log(resp)
-        alert(resp)
+        alert
         const loop=JSON.parse(resp);
         console.log(loop.length)
     for(let i=0;i<loop.length;i++){

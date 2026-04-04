@@ -63,13 +63,20 @@ usersRoute.setDb(db)
 adminsRoute.setDb(db)
 hotelsRoute.setDb(db)
 
+app.get(' ', (req, res)=>{
+
+
+res.send('public/index.html')
+
+});
 // Use routes
 app.use('/', usersRoute.router)
 app.use('/', adminsRoute.router)
 app.use('/', hotelsRoute.router)
 const Port = process.env.PORT || 3000;
 app.listen(Port, () => {
-console.log(`Server is up on port ${Port}`  );
+console.log('server started')
+console.log(`Server is up on port ${Port}` );
 });
 
 })();
