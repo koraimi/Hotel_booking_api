@@ -23,17 +23,17 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-            const result = await res.text();
+            const result = await res.json();
             alert("before")
             
             
             
               alert(result)
-              const js=JSON.parse(result)
+              const js=result
               alert(js)
-                localStorage.setItem('token', js.token);
-               localStorage.setItem('username',js.username)
-            alert(js.url)
+                localStorage.setItem('token', result.token);
+               localStorage.setItem('username',result.username)
+            alert(result.url)
             alert('break')
                 window.location.href=js.url;
                 console.log(js)
