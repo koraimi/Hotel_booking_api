@@ -3,12 +3,16 @@ const express = require('express')
 const initSqlJs = require("sql.js")
 const fs = require("fs")
 const cors = require("cors")
+const path = require('path');
+
+
 
 const usersRoute = require('./routes/users')
 const adminsRoute = require('./routes/admins')
 const hotelsRoute = require('./routes/hotels')
 
 const app = express()
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 app.use(express.static('public'));
 app.use(cors())
