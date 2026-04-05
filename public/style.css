@@ -1,60 +1,107 @@
+/* ===== SAME COLORS AS MAIN PAGE ===== */
+:root {
+  --primary: #14b8a6;
+  --primary-dark: #0f766e;
+  --bg: #f0fdfa;
+  --card: #ffffff;
+  --text: #134e4a;
+}
+
+#webname {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: white;
+  padding: 8px 16px;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 10px 0;
+}
+
+#navbar {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* vertical center */
+  align-items: center;       /* horizontal center */
+  text-align: center;
+  padding: 20px;
+}
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY (same gradient style) ===== */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background: #f7f7f7;
-    color: #333;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
 }
 
-h1, h2 {
-    color: #222;
+/* ===== CENTER CONTENT ===== */
+#body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-form {
-    margin-bottom: 20px;
-    padding: 15px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 5px #ccc;
-    max-width: 400px;
+/* ===== TITLE ===== */
+h1 {
+  margin-bottom: 15px;
 }
 
-input, button {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+/* ===== FORM (same card style as output box) ===== */
+#loginForm {
+  background: var(--card);
+  color: var(--text);
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+/* ===== INPUTS ===== */
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* ===== BUTTONS (same as main page) ===== */
 button {
-    background: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: white;
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover {
-    background: #218838;
+  background: #e0e7ff;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+/* ===== REGISTER BUTTON SPECIAL ===== */
+#reg {
+  margin-top: 10px;
 }
 
-li {
-    background: #fff;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-}
-.pages{
-  background-color:rgb(83,49,143) ;
-  width: 50%;
-  height: 50%;
-  padding: 10px;
-  margin: 10px;
-  display: inline-block;
-  
+/* ===== RESPONSIVE ===== */
+@media (min-width: 768px) {
+  #loginForm {
+    padding: 30px;
+  }
 }
