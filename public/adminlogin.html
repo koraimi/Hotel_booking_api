@@ -45,7 +45,7 @@ const res = await fetch('https://hotel-booking-api-5.onrender.com/adminlog', {
         
         if(res.ok)
         localStorage.removeItem('token')
-        localStorage.setItem("token",result.token)
+        localStorage.setItem("token",result.auth)
         alert(result)
         console.log(result)
         if(result.url){
