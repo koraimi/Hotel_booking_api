@@ -82,7 +82,7 @@
        const name=document.getElementById('username')
        name.innerHTML=username
       // account.innerHTML=role;
-       alert(username)
+       
        const output=document.getElementById('output');
        
        const token=localStorage.getItem("token");
@@ -121,10 +121,10 @@
          
          const resp=await res.text()
          
-         alert(resp)
          
-        console.log('top')
-        console.log(resp)
+         
+        
+        
       
         const loop=JSON.parse(resp);
         console.log(loop.length)
@@ -137,12 +137,12 @@
           const div=document.createElement('div')
          h1.innerHTML=loop[i].hotelname;
       img.setAttribute('src',loop[i].img)
-      alert(loop[i].img)
-      console.log(loop[i].img)
+      
+      
       img.setAttribute("id","item"+i);
       h1.setAttribute('id',"item"+i);
       div.setAttribute('class',"dataelements");
-      div.setAttribute('id','div'+1)
+      div.setAttribute('id','div'+i)
           
           div.appendChild(h1);
          div.appendChild(img);
@@ -174,7 +174,7 @@
           })
         const response=await res.json()
        // alert(response)
-       alert(response)
+       
         bookpage(response)
            })
          }
@@ -210,7 +210,7 @@
         cityname.innerHTML=city;
         emailField.innerHTML=email;
         div.appendChild(hotelname);
-        alert(images.length)
+      
         for(let i=0;i<images.length;i++){
           let img=document.createElement('img')
           img.setAttribute('src',images[i])

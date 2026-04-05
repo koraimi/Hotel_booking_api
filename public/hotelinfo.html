@@ -45,7 +45,7 @@
       images.appendChild(img)
       images.appendChild(b)
       let atr = inp.getAttribute("class")
-      console.log("att is"+atr)
+      
       n++
 
       // img.width="200px"
@@ -54,7 +54,7 @@
       //img.src="download(7).jpeg"
 
       //images.appendChild(img)
-      console.log("pressed")
+      
 
       // let src="download (7).jpeg"
 
@@ -65,12 +65,12 @@
 
         for (let i = 0; i < svbtn.length; i++) {
           svbtn[i].addEventListener("click", ()=> {
-            console.log("somehow works")
+        
             inputs[i].setAttribute("name","photo"+i)
             let src = inputs[i].files[0];
             let url = URL.createObjectURL(src)
             document.getElementsByClassName("img")[i].setAttribute("src", url)
-            console.log("savebtn")
+            
           
 
 
@@ -83,18 +83,18 @@
     let data;
    const submit= document.getElementById("hotelinfo");
    submit.addEventListener('submit',async e=>{
-     console.log(data)
+     
      e.preventDefault()
-     console.log("hshddhdhdh")
+     
      data=Object.fromEntries(new FormData(submit).entries());
-     console.log("hhh")
-     console.log(data);
+     
+     
    })
 
 let upload = document.getElementById("upload");
 
 upload.addEventListener("click", async () => {
-console.log("uploading....")
+
   const formData = new FormData();
 
   // Add hotel text fields
@@ -107,7 +107,7 @@ console.log("uploading....")
       formData.append("images", imgs[i].files[0]); // multiple files
     }
   }
-console.log("uploading....")
+
   // send everything at once
   let token=localStorage.getItem('token');
  // token=''
@@ -119,8 +119,8 @@ console.log("uploading....")
     
     body: formData  // important: NO content-type header!
   });
-  console.log(formData)
-  console.log(token)
+  
+  
 
   let msg = await res.text();
   alert(msg);

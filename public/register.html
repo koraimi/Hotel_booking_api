@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
+  <div id="loader" class="hidden"></div>
     <h1>Register</h1>
     <form id="registerForm">
         <input type="text" name="username" placeholder="Username" required>
@@ -15,10 +15,11 @@
     <p>Already have an account? <a href="login.html">Login here</a></p>
 
     <script>
-
+const loader = document.getElementById("loader");
         const form = document.getElementById('registerForm');
         form.addEventListener('submit', async e => {
             e.preventDefault();
+          loader.classList.remove('hidden')
             const data = Object.fromEntries(new FormData(form).entries());
             const res = await fetch('https://hotel-booking-api-5.onrender.com/register', {
                 method: 'POST',
@@ -27,9 +28,9 @@
             });
             const result = await res.text();
            
-            console.log("hhhhh")
-            alert(result);
             
+            
+            loader.classList.add('hidden')
             if (res.ok) window.location.href = 'login.html';
         });
     </script>

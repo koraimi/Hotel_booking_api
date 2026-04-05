@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="loader" class="hidden"></div>
      <h1 id='webname'>hotel-booking-api.onrender.com</h1>
 
     <h1>regiter form</h1>
@@ -21,10 +22,13 @@
         <button type="submit">register</button>
     </form>
     <script>
+    
+    const loader = document.getElementById("loader");
       const form=document.getElementById("adminregForm")
       
       form.addEventListener("submit",async e=>{
         e.preventDefault();
+        loader.classList.remove('hidden')
         console.log("1")
         const data=Object.fromEntries(new FormData(form).entries());
         let username=data.username;
@@ -37,10 +41,10 @@
           body:JSON.stringify({username:username,password:password})
         
         });
-        alert(data.username+data.password)
         const resp=await res.text();
         if(res.ok){
-          alert(resp)
+          
+          loader.classList.add('hidden,')
         }
         //alert("error try again..")
         }

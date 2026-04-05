@@ -65,25 +65,33 @@ console.log("started.");
 // Pass database to all routes
 usersRoute.setDb(db)
 adminsRoute.setDb(db)
-hotelsRoute.setDb(db)
+hotelsRoute.setDb(db, () => saveDb(db))
 
-app.get('/', (req, res)=>{
-
+app.get('/', (req, res,next)=>{
+try{
 
 
 res.sendFile(path.join(__dirname, 'public', 'index.html'));
 
 
-
+}catch(err){
+next(err);
+}
 });
 // Use routes
 app.use('/', usersRoute.router)
 app.use('/', adminsRoute.router)
 app.use('/', hotelsRoute.router)
+app.use((err, req, res, next) => {
+console.error(err.message)
+res.status(500).json({
+message: 'something went wrong'
+})
+})
 const Port = process.env.PORT || 3000;
 app.listen(Port, () => {
 console.log('server started')
-console.log(process.env.SECRET_KEY)
+
 console.log(`Server is up on port ${Port}` );
 });
 

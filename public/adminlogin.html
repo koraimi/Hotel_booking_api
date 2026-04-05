@@ -6,6 +6,7 @@
     <style> </style>
 </head>
 <body id="body">
+  <div id="loader" class="hidden"></div>
      <h1 id='webname'>hotel-booking-api.onrender.com</h1>
 
     <h1> addmin Login</h1>
@@ -18,44 +19,60 @@
     <button id ="reg">register</button>
     
     <script>
+    
+    const loader = document.getElementById("loader");
       let body =document.getElementById('body');
       const regbtn=document.getElementById("reg")
       regbtn.addEventListener("click",async()=>{
-        
+        loader.classList.remove("hidden");
         const res=await fetch('https://hotel-booking-api-5.onrender.com/admin-register',
        {
          method:"GET"
        });
         const response=await res.text();
-        console.log(response)
+        
+        
        window.location.href=response;
       })
       const form=document.getElementById("loginForm");
       
-      form.addEventListener("submit",async e=>{
-        e.preventDefault();
-    
-       const data = Object.fromEntries(new FormData(form).entries());
-let obj={username:"hsjs",pass:"jdjddjdj"};
-const res = await fetch('https://hotel-booking-api-5.onrender.com/adminlog', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json',
-},
-  body: JSON.stringify(data) // ✅ IMPORTANT
+     
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  // SHOW LOADER
+  
+
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  try {
+    const res = await fetch('https://hotel-booking-api-5.onrender.com/adminlog', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", result.auth);
+      if (result.url) {
+        window.location.href = result.url;
+      }
+    } else {
+      alert("Login failed");
+    }
+
+  } catch (err) {
+    alert("Error connecting to server");
+  }
+
+  // HIDE LOADER
+  loader.classList.add("hidden");
 });
-        
-        const result=await res.json();
-        
-        if(res.ok)
-        localStorage.removeItem('token')
-        localStorage.setItem("token",result.auth)
-        alert(result)
-        console.log(result)
-        if(result.url){
-       window.location.href=result.url
-        }
-      })
-      
     
       
     </script>

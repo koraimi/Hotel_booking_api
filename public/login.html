@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="loader" class="hidden"></div>
      <h1 id='webname'>hotel-booking-api.onrender.com</h1>
 
     <h1>Login</h1>
@@ -16,40 +17,45 @@
 
     <script>
     
-    alert("JS loaded");
+    
         const form = document.getElementById('loginForm');
-        form.addEventListener('submit', async e => {
-          alert('fired event')
-            e.preventDefault();
-            alert("1")
-            const data = Object.fromEntries(new FormData(form).entries());
-            const res = await fetch('https://hotel-booking-api-5.onrender.com/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            const result = await res.json();
-            alert("before")
-            
-            
-            
-              alert(result)
-              const js=result
-              alert(js)
-                localStorage.setItem('token', result.token);
-               localStorage.setItem('username',result.username)
-            alert(result.url)
-            alert('break')
-                window.location.href=js.url;
-                console.log(js)
-               alert(js.url)
-                
-               console.log(token)
-               alert('after')
-        
-            
-            
-        });
+        const loader = document.getElementById("loader");
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  // SHOW LOADER
+  loader.classList.remove("hidden");
+
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  try {
+    const res = await fetch('https://hotel-booking-api-5.onrender.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", result.auth);
+      if (result.url) {
+        window.location.href = result.url;
+      }
+    } else {
+      alert("Login failed");
+    }
+
+  } catch (err) {
+    alert("Error connecting to server");
+  }
+
+  // HIDE LOADER
+  loader.classList.add("hidden");
+});
     </script>
 </body>
 </html>

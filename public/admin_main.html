@@ -27,6 +27,8 @@
      
      
      <script>
+     
+     const token=localStorage.getItem('token');
        const username=localStorage.getItem("username")
        const role=localStorage.getItem("role");
        const account=document.getElementById("role");
@@ -37,7 +39,8 @@
        const logout=document.getElementById('logout')
        logout.addEventListener('click',async()=>{
          
-         const res=await fetch('https://hotel-booking-api-5.onrender.com/logoutAdmin',{
+         
+         const res=await fetch('https://hotel-booking-api-5.onrender.com/logoutadmin',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -63,7 +66,7 @@
       // account.innerHTML=role;
       const profile=document.getElementById('admin_profile');
       const manage=document.getElementById("manage");
-      const token=localStorage.getItem('token');
+      
       
       profile.addEventListener("click",async()=>{
         
@@ -78,7 +81,7 @@
         const result=await res.text();
         output.innerHTML=result;
         alert(result)
-        if(result.find('error')){
+        if(result.includes('error')){
         
         }
         
