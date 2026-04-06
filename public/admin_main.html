@@ -40,7 +40,7 @@
        logout.addEventListener('click',async()=>{
          
          
-         const res=await fetch('http://127.0.0.1:3000/logoutadmin',{
+         const res=await fetch('https://hotel-booking-api-2-fpof.onrender.com/logoutadmin',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -70,7 +70,7 @@
       
       profile.addEventListener("click",async()=>{
         
-        const res=await fetch('http://127.0.0.1:3000/admin_profile',{
+        const res=await fetch('https://hotel-booking-api-2-fpof.onrender.com/admin_profile',{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
@@ -91,7 +91,7 @@
       
       manage.addEventListener('click',async()=>{
         
-        const res=await fetch('http://127.0.0.1:3000/adminpanel',{
+        const res=await fetch('https://hotel-booking-api-2-fpof.onrender.com/adminpanel',{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
@@ -104,7 +104,7 @@
       
       bookings.addEventListener("click",async()=>{
         
-        const res= await fetch("http://127.0.0.1:3000/bookings",{
+        const res= await fetch("https://hotel-booking-api-2-fpof.onrender.com/bookings",{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
