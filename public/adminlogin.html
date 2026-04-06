@@ -25,7 +25,7 @@
       const regbtn=document.getElementById("reg")
       regbtn.addEventListener("click",async()=>{
         loader.classList.remove("hidden");
-        const res=await fetch('https://hotel-booking-api-5.onrender.com/admin-register',
+        const res=await fetch('http://127.0.0.1:3000/admin-register',
        {
          method:"GET"
        });
@@ -47,7 +47,7 @@ form.addEventListener("submit", async e => {
   const data = Object.fromEntries(new FormData(form).entries());
 
   try {
-    const res = await fetch('https://hotel-booking-api-5.onrender.com/adminlog', {
+    const res = await fetch('http://127.0.0.1:3000/adminlog', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,4 +77,5 @@ form.addEventListener("submit", async e => {
       
     </script>
     </body>
-    </head>
+    
+    </html>

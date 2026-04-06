@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>main page</title>
-    <link rel="stylesheet" href="ad_main.css">
+    <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
@@ -40,7 +40,7 @@
        logout.addEventListener('click',async()=>{
          
          
-         const res=await fetch('https://hotel-booking-api-5.onrender.com/logoutadmin',{
+         const res=await fetch('http://127.0.0.1:3000/logoutadmin',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -70,7 +70,7 @@
       
       profile.addEventListener("click",async()=>{
         
-        const res=await fetch('https://hotel-booking-api-5.onrender.com/admin_profile',{
+        const res=await fetch('http://127.0.0.1:3000/admin_profile',{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
@@ -91,7 +91,7 @@
       
       manage.addEventListener('click',async()=>{
         
-        const res=await fetch('https://hotel-booking-api-5.onrender.com/adminpanel',{
+        const res=await fetch('http://127.0.0.1:3000/adminpanel',{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
@@ -104,7 +104,7 @@
       
       bookings.addEventListener("click",async()=>{
         
-        const res= await fetch("https://hotel-booking-api-5.onrender.com/bookings",{
+        const res= await fetch("http://127.0.0.1:3000/bookings",{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token

@@ -23,14 +23,13 @@
 
 form.addEventListener("submit", async e => {
   e.preventDefault();
-
   // SHOW LOADER
   loader.classList.remove("hidden");
 
   const data = Object.fromEntries(new FormData(form).entries());
 
   try {
-    const res = await fetch('https://hotel-booking-api-5.onrender.com/login', {
+    const res = await fetch('http://127.0.0.1:3000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +45,8 @@ form.addEventListener("submit", async e => {
         window.location.href = result.url;
       }
     } else {
-      alert("Login failed");
+      
+      alert("Login failed " +JSON.stringify(result))
     }
 
   } catch (err) {

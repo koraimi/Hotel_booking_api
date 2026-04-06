@@ -7,6 +7,13 @@
   --text: #134e4a;
 }
 
+#p{
+  background-color: white;
+  text-align: left;
+  float: left;
+  position: relative;
+  
+}
 #webname {
   font-size: 2rem;
   font-weight: 800;
@@ -22,11 +29,11 @@
 }
 
 #navbar {
-  display: flex;
+  display:flex-direction;
   flex-direction: column;
-  align-items: center;   /* horizontal center */
+align-items: left;   /* horizontal center */
   text-align: center;
-  padding: 20px;
+  padding: 10px;
 }
 /* ===== RESET ===== */
 * {
@@ -53,7 +60,7 @@ body {
 
 /* ===== TITLE ===== */
 h1 {
-  margin-bottom: 15px;
+  margin-bottom: 0px;
 }
 
 /* ===== FORM (same card style as output box) ===== */
@@ -122,4 +129,9 @@ button:hover {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+#info{
+  margin-top: 20%;
+  padding: 5px;
 }

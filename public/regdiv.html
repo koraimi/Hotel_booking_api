@@ -1,5 +1,5 @@
 
-<html>
+
   
   
   
@@ -22,6 +22,7 @@
         <button type="submit">register</button>
     </form>
     <script>
+    alert('shshz')
     
     const loader = document.getElementById("loader");
       const form=document.getElementById("adminregForm")
@@ -34,7 +35,7 @@
         let username=data.username;
         let password=data.password;
         console.log(username)
-        const res=await fetch('https://hotel-booking-api-5.onrender.com/admin-register-user',{
+        const res=await fetch('http://127.0.0.1:3000/admin-register-user',{
           method: 'POST',
           headers:{"Content-Type":"application/json"},
           
@@ -44,7 +45,7 @@
         const resp=await res.text();
         if(res.ok){
           
-          loader.classList.add('hidden,')
+          loader.classList.add('hidden')
         }
         //alert("error try again..")
         }

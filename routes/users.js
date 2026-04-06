@@ -20,7 +20,7 @@ const errors = validationResult(req);
 
 if (!errors.isEmpty()) {
 return res.status(400).json({
-errors: errors.array(),
+errors: errors.array()
 });
 }
 const compare = db.exec('SELECT * FROM users')[0];
@@ -32,13 +32,13 @@ return res.send("user already exists try again")
 const hashed = await bcrypt.hash(user.password, 10);
 db.run("INSERT INTO users (username, password) VALUES (?, ?);",
 [user.username, hashed]);
-return res.send("registered success")
+return res.json({message: "registered success"})
 }
 } else {
 const hashed = await bcrypt.hash(user.password, 10);
 db.run("INSERT INTO users (username, password) VALUES (?, ?);",
 [user.username, hashed]);
-return res.send("registered success")
+return res.json({message: "registered success"})
 }
 }catch(err){
 
@@ -49,6 +49,7 @@ next(err);
 router.post('/login', [body('username').notEmpty().withMessage('Invalid username'), body('password').notEmpty().withMessage('please enter a valid password')], async (req, res,next) => {
 try{
 const data = req.body
+
 const errors = validationResult(req);
 
 if (!errors.isEmpty()) {
@@ -80,6 +81,7 @@ id: user.id,
 username: data.username,
 role: "user"
 }, process.env.SECRET_KEY, { expiresIn: '1h' });
+
 return res.json({
 username: data.username,
 auth: token,

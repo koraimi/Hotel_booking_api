@@ -6,16 +6,18 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-       <h1 id='webname'>hotel-booking-api.onrender.com</h1>
-
+     
+        <h1 id='webname'>hotel-booking-api.onrender.com</h1>
     <div id="navbar">
-      <h4 id="role">role</h4>
-      <h3 id="username">username</h3>
-      <h1>bookingchad.com</h1>
+     
+    
+<h4 id="role">role</h4>
+ <p id="username">username</p>
+      
       <button id='profilebtn'>profile</button>
        <button id="bookings">bookings</button>
         <button>about</button>
-         <button>contact us</button>
+         <button id='contact'>contact us</button>
          <button id="logout">logout</button>
      
     </div>
@@ -33,6 +35,17 @@
        you can browse all the hotels availeble and choose what fits you</p>
      </div>
      
+     <footer>
+     <div id='info' class='hidden'>
+       
+       <h2>contact info</h2>
+       <h3>email:<a href=''>mohammad22nd@gmail.com</a></h3>
+       <h3>phone number :96988101</h3>
+       
+       </div>
+       <h1>about</h1>
+       <div id='aboutinfo'>this is a real working hotel booking web app project you can register as a user or admin with all the features backend is highlevel strong with features like authentication and validation it uses sqlite3 database admins can post thier hotels and manage it add rooms remove rooms etc..users can book hotels and see thier bookings </div>
+     </footer>
      
      <script>
        
@@ -46,11 +59,23 @@
         
        }
        
+       const contactbtn=document.getElementById('contact');
+       const info=document.getElementById('info');
+       
+       contactbtn.addEventListener('click',()=>{
+        
+        if(info.classList=='hidden'){
+         info.classList.remove('hidden')
+        }else{
+        info.classList.add('hidden')
+       }
+       })
+       
        const profilebtn=document.getElementById('profilebtn');
        
        profilebtn.addEventListener('click',async()=>{
         
-        const res=await fetch('https://hotel-booking-api-5.onrender.com/user_profile',{
+        const res=await fetch('http://127.0.0.1:3000/user_profile',{
           method:'GET',
           headers:{
               'Authorization':'Bearer '+token}
@@ -58,12 +83,13 @@
         
         const data=await res.json();
         render(JSON.stringify(data))
+        alert(data)
        })
        const bookings=document.getElementById('bookings');
       
       bookings.addEventListener('click',async()=>{
         
-        const res=await fetch('https://hotel-booking-api-5.onrender.com/mybookings',{
+        const res=await fetch('http://127.0.0.1:3000/mybookings',{
           method:'GET',
           headers:{
               'Authorization':'Bearer '+token}
@@ -89,7 +115,7 @@
        const logoutbtn=document.getElementById('logout');
        logoutbtn.addEventListener('click',async()=>{
          
-         const res=await fetch('https://hotel-booking-api-5.onrender.com/logout',{
+         const res=await fetch('http://127.0.0.1:3000/logout',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -112,7 +138,7 @@
        const findbtn=document.getElementById('find');
        findbtn.addEventListener('click',async ()=>{
          output.textContent=""
-         const res= await fetch('https://hotel-booking-api-5.onrender.com/findHotels',{
+         const res= await fetch('http://127.0.0.1:3000/findHotels',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -166,7 +192,7 @@
            
            items[i].addEventListener('click',async()=>{
              const h=document.getElementById("item"+i).textContent;
-          const res=await fetch(`https://hotel-booking-api-5.onrender.com/hotel/${h}`,{
+          const res=await fetch(`http://127.0.0.1:3000/hotel/${h}`,{
             method:'GET',
             headers:{
               'Authorization':'Bearer '+token
@@ -237,11 +263,12 @@
           city:cityname.textContent}
           
           
-        const res=await fetch(`https://hotel-booking-api-5.onrender.com/book/${JSON.stringify(info)}`,{
+        const res=await fetch(`http://127.0.0.1:3000/book/${JSON.stringify(info)}`,{
           method:'GET',
           headers:{
               'Authorization':'Bearer '+token}
         })
+        
         
         const message=await res.json();
         
@@ -250,8 +277,8 @@
         
         
       })
-      
       }
+      
       
      </script>
   </body>

@@ -19,18 +19,21 @@ filename: (req, file, cb) => cb(null, Date.now() + "_" + file.originalname)
 let db;
 function setDb(database) { db = database }
 
-router.post('/adminlog', [body('username').notEmpty().withMessage('Invalid name'), body('password').isLength({min: 8 }).withMessage('password must be 8 or more')], async (req, res,next) => {
+router.post('/adminlog', [body('username').notEmpty().withMessage('Invalid name'), body('password').notEmpty().withMessage('password must be 8 or more')], async (req, res,next) => {
 try{
+
 const us = req.body;
 const errors = validationResult(req);
 
 if (!errors.isEmpty()) {
+console.log(errors.array)
 return res.status(400).json({
 errors: errors.array(),
 });
 }
 
 const dbres = db.exec('SELECT * FROM admins')[0];
+console.log(dbres)
 if (!dbres || !dbres.values) {
 return res.status(404).json({ message: "no users found" });
 }
@@ -39,11 +42,17 @@ let isfound = false;
 let user = {};
 for (const item of dbres.values) {
 const passwordMatch = await bcrypt.compare(us.password, item[2]);
+
 if (item[1] == us.username && passwordMatch) {
 isfound = true;
 user = item;
 user.id = item[0]
+console.log('works')
 break;
+
+} else {
+console.log('password is wrong')
+res.json({'message': 'no match found'})
 }
 }
 if (!isfound) return res.status(400).json({ message: "not found" })
