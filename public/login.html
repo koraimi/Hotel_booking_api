@@ -29,7 +29,7 @@ form.addEventListener("submit", async e => {
   const data = Object.fromEntries(new FormData(form).entries());
 
   try {
-    const res = await fetch('https://hotel-booking-api.fly.dev/register.html/login', {
+    const res = await fetch('https://hotel-booking-api.fly.dev/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
