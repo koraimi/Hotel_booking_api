@@ -113,7 +113,7 @@ saveDb(db)
 
 }
 const Port = process.env.PORT || 3000;
-app.listen(Port, '0,0,0,0', () => {
+app.listen(Port, '0.0.0.0', () => {
 console.log('server started')
 
 console.log(`Server is up on port ${Port}` );
