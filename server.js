@@ -117,7 +117,7 @@ app.listen(Port, '0.0.0.0', () => {
 console.log('server started')
 
 console.log(`Server is up on port ${Port}` );
-
+start();
 });
 
 })();

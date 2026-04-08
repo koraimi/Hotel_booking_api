@@ -45,7 +45,7 @@
        logout.addEventListener('click',async()=>{
          
          
-         const res=await fetch('http://127.0.0.1:3000/logoutadmin',{
+         const res=await fetch('https://hotel-booking-api.fly.dev/register.html/logoutadmin',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -75,7 +75,7 @@
       
       profile.addEventListener("click",async()=>{
         
-        const res=await fetch('http://127.0.0.1:3000/admin_profile',{
+        const res=await fetch('https://hotel-booking-api.fly.dev/register.html/admin_profile',{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
@@ -99,7 +99,7 @@
       
       manage.addEventListener('click',async()=>{
         
-        const res=await fetch('http://127.0.0.1:3000/adminpanel',{
+        const res=await fetch('https://hotel-booking-api.fly.dev/register.html/adminpanel',{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
@@ -112,7 +112,7 @@
       
       bookings.addEventListener("click",async()=>{
         
-        const res= await fetch("http://127.0.0.1:3000/bookings",{
+        const res= await fetch("https://hotel-booking-api.fly.dev/register.html/bookings",{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token

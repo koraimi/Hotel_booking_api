@@ -111,7 +111,7 @@ upload.addEventListener("click", async () => {
   // send everything at once
   let token=localStorage.getItem('token');
  // token=''
-  const res = await fetch("http://127.0.0.1:3000/upload", {
+  const res = await fetch("https://hotel-booking-api.fly.dev/register.html/upload", {
     method: "POST",
     headers:{
       'Authorization':'Bearer '+token
