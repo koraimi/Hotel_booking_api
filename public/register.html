@@ -21,7 +21,7 @@ const loader = document.getElementById("loader");
             e.preventDefault();
           loader.classList.remove('hidden')
             const data = Object.fromEntries(new FormData(form).entries());
-            const res = await fetch('https://hotel-booking-api-2-fpof.onrender.com/register', {
+            const res = await fetch('http://127.0.0.1:3000/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)

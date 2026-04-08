@@ -53,6 +53,7 @@ if (!admins) return res.json({ message: 'error something is wrong' });
 const admin = admins.values.find(o => o[1] == ownername);
 if (!admin) return res.json({ message: 'failed' });
 const adminid = admin[0];
+console.log('admin[0] '+ admin[0] )
 const users = db.exec('SELECT * FROM users')[0];
 if (!users) return res.json({ error: 'no users found' })
 const verifyUser = users.values.find(u =>
@@ -60,11 +61,12 @@ u[0] === req.user.id && u[1] === req.user.username);
 if (!verifyUser) return res.json({ error: 'user not found' });
 const bookdate = new Date();
 const enddate = new Date(bookdate.getTime() + 24 * 60 * 60 * 1000);
-const state = false;
+const state = true;
 const price = target[3] + 0.4;
 db.run('INSERT INTO bookings (userid,adminid,hotelname,username,price,date_start,date_end,state) VALUES (?,?,?,?,?,?,?,?);',
 [req.user.id, adminid, hotelname, req.user.username, price,
 bookdate.toISOString(), enddate.toISOString(), state]);
+console.log(adminid)
 saveDb()
 res.json({ message: 'booked', info: info })
 // saveDb will be called from server.js

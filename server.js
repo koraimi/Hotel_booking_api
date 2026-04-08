@@ -88,11 +88,36 @@ res.status(500).json({
 message: 'something went wrong'
 })
 })
+let running = true;
+
+async function start() {
+while (running) {
+await checkbookings();
+await new Promise(r => setTimeout(r, 2000000));
+}
+}
+
+
+async function checkbookings(){
+
+const date = new Date().toISOString();
+
+db.run(`DELETE FROM bookings WHERE date_end < ?`, [date]);
+
+
+
+
+saveDb(db)
+
+
+
+}
 const Port = process.env.PORT || 3000;
 app.listen(Port, () => {
 console.log('server started')
 
 console.log(`Server is up on port ${Port}` );
+start();
 });
 
 })();

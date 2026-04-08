@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="style.css">
   <body>
        <h1 id='webname'>hotel-booking-api.onrender.com</h1>
-
+<button id='edit'>edit</button>
 <form id="hotelinfo">
     <input type="text" name="hotelname" placeholder="enter hotel name here">
     <input type="number" name="rooms" placeholder="enter number of rooms">
@@ -111,7 +111,7 @@ upload.addEventListener("click", async () => {
   // send everything at once
   let token=localStorage.getItem('token');
  // token=''
-  const res = await fetch("https://hotel-booking-api-2-fpof.onrender.com/upload", {
+  const res = await fetch("http://127.0.0.1:3000/upload", {
     method: "POST",
     headers:{
       'Authorization':'Bearer '+token

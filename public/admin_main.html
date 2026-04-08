@@ -27,7 +27,12 @@
      
      
      <script>
-     
+     async function editinfo(){
+        
+        
+        alert('editting ...')
+        
+      }
      const token=localStorage.getItem('token');
        const username=localStorage.getItem("username")
        const role=localStorage.getItem("role");
@@ -40,7 +45,7 @@
        logout.addEventListener('click',async()=>{
          
          
-         const res=await fetch('https://hotel-booking-api-2-fpof.onrender.com/logoutadmin',{
+         const res=await fetch('http://127.0.0.1:3000/logoutadmin',{
            method:'GET',
            headers:{
               'Authorization':'Bearer '+token
@@ -70,7 +75,7 @@
       
       profile.addEventListener("click",async()=>{
         
-        const res=await fetch('https://hotel-booking-api-2-fpof.onrender.com/admin_profile',{
+        const res=await fetch('http://127.0.0.1:3000/admin_profile',{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
@@ -80,10 +85,13 @@
         
         const result=await res.text();
         output.innerHTML=result;
-        alert(result)
-        if(result.includes('error')){
         
-        }
+        const editbtn=document.createElement('button')
+        editbtn.textContent='edit'
+        output.appendChild(editbtn)
+      editbtn.addEventListener('click',editinfo)
+        
+        
         
         
         
@@ -91,7 +99,7 @@
       
       manage.addEventListener('click',async()=>{
         
-        const res=await fetch('https://hotel-booking-api-2-fpof.onrender.com/adminpanel',{
+        const res=await fetch('http://127.0.0.1:3000/adminpanel',{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
@@ -104,15 +112,35 @@
       
       bookings.addEventListener("click",async()=>{
         
-        const res= await fetch("https://hotel-booking-api-2-fpof.onrender.com/bookings",{
+        const res= await fetch("http://127.0.0.1:3000/bookings",{
           method:'GET',
           headers:{
                   'Authorization':'Bearer '+token
           }
         })
-        const resp=await res.text();
+        const resp=await res.json();
+        alert(JSON.stringify(resp))
+        if(res.ok){
+          
+          output.textContent='';
+          resp.forEach(item =>{
+            const p=document.createElement('p');
+            let state;
+            if(item.state==1){
+              state=true;
+            }else state=false;
+            p.textContent= 'booking id :' +item.id+ '    Hotelname :'+ item.hotelName+' ' + 'user : '+item.by +' state :'+ state
+            output.appendChild(p)
+       
+ })
         
-        alert(resp);
+        alert(text)
+        
+        }else{
+          alert(JSON.stringify(resp))
+        }
+        
+      
         
       })
       

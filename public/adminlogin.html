@@ -25,13 +25,13 @@
       const regbtn=document.getElementById("reg")
       regbtn.addEventListener("click",async()=>{
         loader.classList.remove("hidden");
-        const res=await fetch('https://hotel-booking-api-2-fpof.onrender.com/admin-register',
+        const res=await fetch('http://127.0.0.1:3000/admin-register',
        {
          method:"GET"
        });
         const response=await res.text();
         
-        
+        alert(response)
        window.location.href=response;
       })
       const form=document.getElementById("loginForm");
@@ -46,8 +46,8 @@ form.addEventListener("submit", async e => {
 
   const data = Object.fromEntries(new FormData(form).entries());
 
-  try {
-    const res = await fetch('https://hotel-booking-api-2-fpof.onrender.com/adminlog', {
+  
+    const res = await fetch('http://127.0.0.1:3000/adminlog', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,17 +58,21 @@ form.addEventListener("submit", async e => {
     const result = await res.json();
 
     if (res.ok) {
-      localStorage.setItem("token", result.auth);
-      if (result.url) {
-        window.location.href = result.url;
-      }
-    } else {
-      alert("Login failed");
+      
+      
+        alert(JSON.stringify(result))
+        if(result.url){
+          localStorage.setItem("token", result.auth);
+window.location.href = result.url;
+        
+        }
+        }
+     else {
+      
+      alert(JSON.stringify(result))
     }
 
-  } catch (err) {
-    alert("Error connecting to server");
-  }
+  
 
   // HIDE LOADER
   loader.classList.add("hidden");

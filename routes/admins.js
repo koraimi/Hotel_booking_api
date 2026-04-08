@@ -19,10 +19,11 @@ filename: (req, file, cb) => cb(null, Date.now() + "_" + file.originalname)
 let db;
 function setDb(database) { db = database }
 
-router.post('/adminlog', [body('username').notEmpty().withMessage('Invalid name'), body('password').notEmpty().withMessage('password must be 8 or more')], async (req, res,next) => {
+router.post('/adminlog', [body('username').notEmpty().withMessage('Invalid name'), body('password').notEmpty().withMessage('password is required')], async (req, res,next) => {
 try{
 
 const us = req.body;
+console.log(us)
 const errors = validationResult(req);
 
 if (!errors.isEmpty()) {
@@ -40,36 +41,51 @@ return res.status(404).json({ message: "no users found" });
 
 let isfound = false;
 let user = {};
-for (const item of dbres.values) {
-const passwordMatch = await bcrypt.compare(us.password, item[2]);
 
-if (item[1] == us.username && passwordMatch) {
+const admin = dbres.values.find(item=>item[1] == us.username );
+
+if (!admin) return res.status(400).json({message: 'username is wrong' })
+
+const passwordMatch = await bcrypt.compare(us.password, admin[2])
+
+
+
+if (passwordMatch && us.username == admin[1]) {
 isfound = true;
-user = item;
-user.id = item[0]
-console.log('works')
-break;
+user = req.user;
+
+
 
 } else {
-console.log('password is wrong')
-res.json({'message': 'no match found'})
-}
+
+res.json({'message': 'no match' })
 }
 if (!isfound) return res.status(400).json({ message: "not found" })
+
+
+
+
+
+
 const token = jwt.sign({
-id: user.id,
-username: us.username,
+id: admin[0],
+username: admin[1],
 role: 'admin'
 }, process.env.SECRET_KEY, { expiresIn: '1h' });
+
 res.json({ text: "found admin", auth: token, url: 'admin_main.html' })
 }catch(err){
 next(err);
 }
 })
+router.get('/admin-register', (req, res)=>{
 
+res.send('regdiv.html')
+})
 router.post('/admin-register-user', [body('username').notEmpty().withMessage('Invalid name'), body('password').isLength({min: 8 }).withMessage('password must be 8 or more')], async (req, res,next) => {
 try{
 const usd = req.body;
+
 const errors = validationResult(req);
 
 if (!errors.isEmpty()) {
@@ -93,6 +109,7 @@ const hashed = await bcrypt.hash(usd.password, 10);
 db.run('INSERT INTO admins(username,password) VALUES(?,?);',
 [usd.username, hashed]);
 return res.send("first admin registered")
+saveDb(db);
 }
 
 }catch(err){
@@ -104,6 +121,7 @@ router.post('/upload', authenticateToken, isAdmin,
 upload.array("images"), [body('hotelname').notEmpty().withMessage('enter name'), body('rooms').notEmpty().withMessage('enter a value'), body('email').isEmail(), body('price').notEmpty().withMessage('enter price')], (req, res,next) => {
 try{
 const data = req.body;
+
 const errors = validationResult(req);
 if (!errors.isEmpty()) {
 return res.status(400).json({ errors: errors.array() });
@@ -119,7 +137,7 @@ if (!owner )return res.status(400).json({message: 'owner name is missing'})
 const match = admin.values.find(l => l[1] === owner);
 if (match) {
 let type = JSON.stringify(imageurs)
-db.exec('INSERT INTO hotels(hotelname,rooms,price,city,phone,email,photos,location,owner) VALUES(?,?,?,?,?,?,?,?,?);',
+db.run('INSERT INTO hotels(hotelname,rooms,price,city,phone,email,photos,location,owner) VALUES(?,?,?,?,?,?,?,?,?);',
 [data.hotelname, data.rooms, data.price, data.city,
 data.phone, data.email, type, data.loc, owner]);
 return res.send("uploaded success")
@@ -175,10 +193,35 @@ next(err);
 router.get('/bookings', authenticateToken, isAdmin, (req, res,next) => {
 
 try{
+const ad = req.user;
 const adminbookings = db.exec('SELECT * FROM bookings')[0];
+
 if (!adminbookings) return res.json({ error: 'bookings are empty' })
 const this_admin_bookings = adminbookings.values.filter(b => b[2] == req.user.id)
-res.json(this_admin_bookings)
+
+console.log(this_admin_bookings)
+
+const list = [];
+for (const book of this_admin_bookings){
+const books = {
+id: book[0],
+hotelName: book[3],
+price: book[5],
+dateStart: book[6],
+dateEnd: book[7],
+by: book[4],
+state: book[8]
+}
+
+list.push(books)
+}
+
+
+
+
+console.log(list)
+
+res.json(list)
 }catch(err){
 next(err);
 }

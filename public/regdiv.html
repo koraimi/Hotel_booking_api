@@ -35,7 +35,7 @@
         let username=data.username;
         let password=data.password;
         console.log(username)
-        const res=await fetch('https://hotel-booking-api-2-fpof.onrender.com/admin-register-user',{
+        const res=await fetch('http://127.0.0.1:3000/admin-register-user',{
           method: 'POST',
           headers:{"Content-Type":"application/json"},
           
@@ -43,8 +43,13 @@
         
         });
         const resp=await res.text();
+        
         if(res.ok){
-          
+          alert(resp)
+          loader.classList.add('hidden')
+        }
+        else{
+          alert(resp)
           loader.classList.add('hidden')
         }
         //alert("error try again..")
